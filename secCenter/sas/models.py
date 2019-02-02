@@ -9,26 +9,26 @@ from tigercipher.client import CipherClient
 
 class decrypt_log():
     def __init__(self):
-        self.APP_KEY = 'ohnuToo5Se1rea'
-        self.APP_SECRET = 'Hahpie4ohzie7aequulohjie7sah2Eev'
+        self.APP_KEY = 'oewrretret'
+        self.APP_SECRET = 'trwetrwetrewetwertrewt'
         try:
-            self.conn = ES(['172.29.52.111:9200'])
+            self.conn = ES(['172.0.0.1:9200'])
         except Exception as e:
             print e
     def get_app_name(self,app_key):
-        data={'Ka7Kohng2jahvaiz':'oauth.itiger.com',
-              'eimooR6ohboo4ahk':'customer.tigerfintech.com',
-              'Kahghiech7seighe':'www.itiger.com',
-              'iewiy5eiViishiem':'crm.tigerfintech.com',
-              'beepeingaeT8Yoor':'v.tigerfintech.com',
-              'ShahraighooThe1n':'report',
-              'li9dau9Xohro5ahj':'sms',
-              'VeiH2Thael5enoh3':'script',
-              'kegBTVnPP6WPMk2g':'excalibur',
-              'bfQbKJXJOvWAUeoz':'payserver',
-              'oRae9eethai0sh':'roc',
-              'equobe5johtaBo':'am.itiger.com',
-              'ohnuToo5Se1rea':'security'}
+        data={'Ka7Kohng2jahv':'oauth.itiger.com',
+              'eimooR6ohboo4':'customer.tigerfintech.com',
+              'Kahghiech7se':'www.itiger.com',
+              'iewiy5eiViis':'crm.tigerfintech.com',
+              'beepeingaeT8':'v.tigerfintech.com',
+              'Shahraighoo':'report',
+              'li9dau9Xohro':'sms',
+              'VeiH2Thael5e':'script',
+              'kegBTVnPP6WP':'excalibur',
+              'bfQbKJXJOvWA':'payserver',
+              'oRae9eetha':'roc',
+              'equobe5joh':'am.itiger.com',
+              'ohnuToo5Sa':'security'}
         return data[app_key]
     def search_es(self,index_type,str,userid,stime,etime):
         if index_type==1:
@@ -67,20 +67,20 @@ class decrypt_log():
             result.append(tmp)
         return result
     def encrypt(self,str):
-        zk_hosts = '172.31.48.17:2181,172.31.48.18:2181,172.31.48.20:2181'
+        zk_hosts = '192.31.48.17:2181,192.31.48.18:2181,192.31.48.20:2181'
         zk_path = '/cipher_internal'
-        app_key = 'ohnuToo5Se1rea'
-        app_secret = 'Hahpie4ohzie7aequulohjie7sah2Eev'
+        app_key = 'ohnu'
+        app_secret = '123456'
         cipher = CipherClient(zk_hosts, zk_path, app_key, app_secret)
         user_id = 'secCenter'
         ip = '172.30.65.2'
         result = cipher.encrypt(str, user_id, ip)
         return result
     def xhash(self, str):
-        zk_hosts = '172.31.48.17:2181,172.31.48.18:2181,172.31.48.20:2181'
+        zk_hosts = '192.31.48.17:2181,192.31.48.18:2181,192.31.48.20:2181'
         zk_path = '/cipher_internal'
-        app_key = 'ohnuToo5Se1rea'
-        app_secret = 'Hahpie4ohzie7aequulohjie7sah2Eev'
+        app_key = 'ohnu'
+        app_secret = '123456'
         cipher = CipherClient(zk_hosts, zk_path, app_key, app_secret)
         user_id = 'secCenter'
         ip = '172.30.65.2'
