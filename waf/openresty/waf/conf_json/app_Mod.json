@@ -1,0 +1,68 @@
+[ {
+  "action": [ "deny" ],
+  "hostname": [ "101.200.122.200", "" ],
+  "state": "on",
+  "uri": [ "^/([\\w]{4}\\.html|deny\\.do|你好\\.html)$", "jio" ]
+}, {
+  "action": [ "rehtml" ],
+  "hostname": [ "101.200.122.200", "" ],
+  "rehtml": "<html>hi~!</html>",
+  "state": "on",
+  "uri": [ "/rehtml", "" ]
+}, {
+  "action": [ "refile" ],
+  "hostname": [ "101.200.122.200", "" ],
+  "refile": "2.txt",
+  "state": "on",
+  "uri": [ "/refile", "" ]
+}, {
+  "action": [ "deny" ],
+  "app_ext": [ [ "ip", [ [ "106.37.236.170", "1.1.1.1" ], "list", true ] ] ],
+  "hostname": [ [ "101.200.122.200", "127.0.0.1" ], "list" ],
+  "state": "on",
+  "uri": [ "/api/.*", "jio" ]
+}, {
+  "action": [ "relua" ],
+  "hostname": [ "127.0.0.1:5460", "" ],
+  "relua": "1.lua",
+  "state": "on",
+  "uri": [ "/relua", "" ]
+}, {
+  "action": [ "relua_str" ],
+  "hostname": [ "127.0.0.1:5460", "" ],
+  "relua_str": "local a = 1 if a<1 then ngx.say(1) end return 2",
+  "state": "on",
+  "uri": [ "/relua", "" ]
+}, {
+  "action": [ "log" ],
+  "hostname": [ "127.0.0.1:5460", "" ],
+  "state": "on",
+  "uri": [ "/log", "" ]
+}, {
+  "action": [ "deny" ],
+  "app_ext": [ [ "uri", [ "admin", "in" ], "or" ], [ "cookie", [ "c_test", "jio" ], "and" ], [ "ip", [ [ "1.1.1.1", "127.0.0.1" ], "list", true ], "and" ] ],
+  "hostname": [ [ "101.200.122.200", "127.0.0.1" ], "list" ],
+  "state": "on",
+  "uri": [ "/api/.*", "jio" ]
+}, {
+  "action": [ "refile" ],
+  "app_ext": [ [ "args", [ "true", "@token@", [ "cctoken" ], true ] ] ],
+  "hostname": [ "localhost5460", "" ],
+  "refile": [ "js_debug.txt", "text/html" ],
+  "state": "on",
+  "uri": [ "/api/test/debug", "" ]
+}, {
+  "action": [ "refile" ],
+  "app_ext": [ [ "args", [ "^[\\w]{6}$", "jio", [ "cc", 3 ], true ] ] ],
+  "hostname": [ "localhost5460", "" ],
+  "refile": [ "js_time.txt", "text/html" ],
+  "state": "on",
+  "uri": [ "/api/test/time", "" ]
+}, {
+  "action": [ "deny" ],
+  "app_ext": [ [ "post_form", [ "\\.(jpg|jpeg|png|webp|gif)$", "jio", [ "image0", 2 ], true ], "or" ], [ "post_form", [ "(;|-|/)", "jio", [ "image0", 2 ], false ], "or" ] ],
+  "hostname": [ "localhost5460", "" ],
+  "post_form": 1024,
+  "state": "on",
+  "uri": [ "/api/test/debug", "" ]
+} ]

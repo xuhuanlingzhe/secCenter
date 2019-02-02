@@ -1,0 +1,7 @@
+[ {
+  "action": "set_cookie",
+  "hostname": [ "101.200.122.200", "" ],
+  "set_cookie": [ "asjldisdafpopliu8909jk34jk", "tokenYouname" ],
+  "state": "on",
+  "uri": [ "^/rewrite$", "jio" ]
+} ]

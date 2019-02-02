@@ -1,0 +1,41 @@
+[ {
+  "action": "allow",
+  "hostname": [ "*", "" ],
+  "state": "on",
+  "uri": [ "\\.(css|js|flv|swf|woff|txt)$", "jio" ]
+}, {
+  "action": "allow",
+  "hostname": [ [ "127.0.0.1", "passport.game.com" ], "list" ],
+  "state": "on",
+  "uri": [ "\\.(gif|jpg|png|jpeg|bmp|ico)$", "jio" ]
+}, {
+  "action": "deny",
+  "hostname": [ "*", "" ],
+  "state": "on",
+  "uri": [ "\\.(svn|git|htaccess|bash_history)", "jio" ]
+}, {
+  "action": "deny",
+  "hostname": [ "*", "" ],
+  "state": "on",
+  "uri": [ "\\.(bak|inc|old|mdb|sql|backup|java|class)$", "jio" ]
+}, {
+  "action": "deny",
+  "hostname": [ "*", "" ],
+  "state": "on",
+  "uri": [ "(vhost|bbs|hostname|wwwroot|www|site|root|hytop|flashfxp).*.rar", "jio" ]
+}, {
+  "action": "deny",
+  "hostname": [ "*", "" ],
+  "state": "on",
+  "uri": [ "(phpmyadmin|jmx-console|jmxinvokerservlet)", "jio" ]
+}, {
+  "action": "deny",
+  "hostname": [ "*", "" ],
+  "state": "on",
+  "uri": [ "java\\.lang", "jio" ]
+}, {
+  "action": "deny",
+  "hostname": [ "*", "" ],
+  "state": "on",
+  "uri": [ "/(attachments|upimg|images|css|uploadfiles|html|uploads|templets|static|template|data|inc|forumdata|upload|includes|cache|avatar)/(\\w+).(php|jsp)", "jio" ]
+} ]

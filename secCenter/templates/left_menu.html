@@ -1,0 +1,207 @@
+<div class="page-sidebar-wrapper">
+    <div class="page-sidebar navbar-collapse collapse">
+
+        <ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
+            <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+            <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+            <li class="sidebar-toggler-wrapper hide">
+                <div class="sidebar-toggler">
+                    <span></span>
+                </div>
+            </li>
+            <li class="sidebar-search-wrapper">
+                <form class="sidebar-search  sidebar-search-bordered" action="page_general_search_3.html" method="POST">
+                    <a href="javascript:;" class="remove">
+                        <i class="icon-close"></i>
+                    </a>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search...">
+                        <span class="input-group-btn">
+                            <a href="javascript:;" class="btn submit">
+                                <i class="icon-magnifier"></i>
+                            </a>
+                        </span>
+                    </div>
+                </form>
+                <!-- END RESPONSIVE QUICK SEARCH FORM -->
+            </li>
+            <li class="nav-item start ">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-home"></i>
+                    <span class="title">Dashboard</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item start ">
+                        <a href="index.html" class="nav-link ">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Dashboard 1</span>
+                        </a>
+                    </li>
+                    <li class="nav-item start ">
+                        <a href="waf_summary.html" class="nav-link ">
+                            <i class="icon-bulb"></i>
+                            <span class="title">Dashboard 2</span>
+                            <span class="badge badge-success">1</span>
+                        </a>
+                    </li>
+                    <li class="nav-item start ">
+                        <a href="dashboard_3.html" class="nav-link ">
+                            <i class="icon-graph"></i>
+                            <span class="title">Dashboard 3</span>
+                            <span class="badge badge-danger">5</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="heading">
+                <h3 class="uppercase">Features</h3>
+            </li>
+            <li class="nav-item  {{ tag1 }} ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="icon-diamond"></i>
+                <span class="title">资产管理</span>
+                {% if tag1 != nil %}
+                    <span class="arrow open"></span>
+                {% else %}
+                    <span class="arrow"></span>
+                {% endif %}
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item {{ subtag11 }} ">
+                    <a href="/asset/index" class="nav-link ">
+                        <span class="title">资产动态</span>
+                    </a>
+                </li>
+                <li class="nav-item {{ subtag12 }}">
+                    <a href="/asset/hosts" class="nav-link ">
+                        <span class="title">主机管理</span>
+                    </a>
+                </li>
+                <li class="nav-item {{ subtag13 }}">
+                    <a href="/asset/ports" class="nav-link ">
+                        <span class="title">服务管理</span>
+                    </a>
+                </li>
+                <li class="nav-item {{ subtag14 }}">
+                    <a href="/asset/domains" class="nav-link ">
+                        <span class="title">域名管理</span>
+                    </a>
+                </li>
+                <li class="nav-item {{ subtag15 }}">
+                    <a href="/asset/rds" class="nav-link ">
+                        <span class="title">根域名</span>
+                    </a>
+                </li>
+                <li class="nav-item  ">
+                    <a href="ui_buttons_spinner.html" class="nav-link ">
+                        <span class="title">Spinner Buttons</span>
+                    </a>
+                </li>
+                <li class="nav-item  ">
+                    <a href="ui_confirmations.html" class="nav-link ">
+                        <span class="title">Popover Confirmations</span>
+                    </a>
+                </li>
+                <li class="nav-item  ">
+                    <a href="ui_sweetalert.html" class="nav-link ">
+                        <span class="title">Bootstrap Sweet Alerts</span>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+            <li class="nav-item  {{ tag2 }}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-diamond"></i>
+                    <span class="title">waf管理</span>
+                    {% if tag2 != nil %}
+                        <span class="arrow open"></span>
+                    {% else %}
+                        <span class="arrow"></span>
+                    {% endif %}
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item  {{ subtag21 }}">
+                        <a href="/waf/index" class="nav-link ">
+                            <span class="title">安全动态</span>
+                        </a>
+                    </li>
+                    <li class="nav-item  {{ subtag22 }}">
+                        <a href="/waf/pubrules" class="nav-link ">
+                            <span class="title">公共规则</span>
+                        </a>
+                    </li>
+                    <li class="nav-item  {{ subtag23 }}">
+                        <a href="ui_colors.html" class="nav-link ">
+                            <span class="title">站点规则</span>
+                        </a>
+                    </li>
+                    <li class="nav-item  {{ subtag24 }}">
+                        <a href="/waf/sites" class="nav-link ">
+                            <span class="title">域名配置</span>
+                        </a>
+                    </li>
+                    <li class="nav-item  {{ subtag25 }}">
+                        <a href="ui_buttons.html" class="nav-link ">
+                            <span class="title">报警查询</span>
+                        </a>
+                    </li>
+                    <li class="nav-item  {{ subtag26 }}">
+                        <a href="/waf/set" class="nav-link ">
+                            <span class="title">系统管理</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item  {{ tag3 }}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-diamond"></i>
+                    <span class="title">态势感知</span>
+                    {% if tag3 != nil %}
+                        <span class="arrow open"></span>
+                    {% else %}
+                        <span class="arrow"></span>
+                    {% endif %}
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item  {{ subtag31 }}">
+                        <a href="/waf/index" class="nav-link ">
+                            <span class="title">总览</span>
+                        </a>
+                    </li>
+                    <li class="nav-item  {{ subtag32 }}">
+                        <a href="/waf/pubrules" class="nav-link ">
+                            <span class="title">紧急事件</span>
+                        </a>
+                    </li>
+                    <li class="nav-item  {{ subtag33 }}">
+                        <a href="ui_colors.html" class="nav-link ">
+                            <span class="title">威胁</span>
+                        </a>
+                    </li>
+                    <li class="nav-item  {{ subtag34 }}">
+                        <a href="/waf/sites" class="nav-link ">
+                            <span class="title">弱点</span>
+                        </a>
+                    </li>
+                    <li class="nav-item  {{ subtag35 }}">
+                        <a href="ui_buttons.html" class="nav-link ">
+                            <span class="title">情报</span>
+                        </a>
+                    </li>
+                    <li class="nav-item  {{ subtag36 }}">
+                        <a href="/sas/decryptindex" class="nav-link ">
+                            <span class="title">解密日志</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
+        </ul>
+        <!-- END SIDEBAR MENU -->
+        <!-- END SIDEBAR MENU -->
+    </div>
+    <!-- END SIDEBAR -->
+</div>

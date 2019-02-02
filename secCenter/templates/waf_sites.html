@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+
+<head>
+    <meta charset="utf-8"/>
+    <title>Metronic Admin Theme #1 | Responsive Bootstrap Tables</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta content="Preview page of Metronic Admin Theme #1 for responsive bootstrap table demos" name="description"/>
+    <meta content="" name="author"/>
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet"
+          type="text/css"/>
+    <link href="/static/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css"/>
+    <link href="/static/global/css/plugins.min.css" rel="stylesheet" type="text/css"/>
+
+    <link href="/static/layouts/layout/css/layout.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/layouts/layout/css/themes/darkblue.min.css" rel="stylesheet" type="text/css" id="style_color"/>
+    <style type="text/css">
+        .row-details {
+            margin-top: 3px;
+            display: inline-block;
+            cursor: pointer;
+            width: 14px;
+            height: 14px;
+        }
+
+        .row-details.row-details-close {
+            background: url("/static/global/img/datatable-row-openclose.png") no-repeat 0 0;
+        }
+
+        .row-details.row-details-open {
+            background: url("/static/global/img/datatable-row-openclose.png") no-repeat 0 -23px !important;
+        }
+    </style>
+
+    <script src="/static/global/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="/static/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/static/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
+    <script src="/static/global/scripts/app.min.js" type="text/javascript"></script>
+    <script src="/static/layouts/layout/scripts/layout.min.js" type="text/javascript"></script>
+    <!-- END THEME LAYOUT SCRIPTS -->
+    <script type="text/javascript">
+        function btn_site(btn_n,row_domain) {
+            switch (btn_n){
+                case 1:
+                    $('input[name="site_domain"]').val(row_domain);
+                    var xurl="/waf/api?action=getsite&domain="+row_domain;
+                    htmlobj=$.ajax({url:xurl,async:false});
+                    $('textarea[name="site_conf_txt"]').val(htmlobj.responseText);
+                    break;
+                case 2:
+                    alert(row_domain);
+                    break;
+                case 3:
+                    var xurl="/waf/api?action=delsite&domain="+row_domain;
+                    htmlobj=$.ajax({url:xurl,async:false});
+                    alert(htmlobj.responseText);
+                    $('#xTable').DataTable().ajax.reload();
+                    break;
+            }
+        }
+        $(document).ready(function () {
+            var dt = $('#xTable').dataTable({
+                "processing": true,
+                "ajax": {
+                    "url": '/waf/api?action=listsite',
+                    "dataSrc": ""
+                },
+                "lengthChange": false,
+                "searching": false,
+                "order": [[1, "asc"]],
+                "sZeroRecords": "对不起，查询不到任何相关数据",
+                "columns": [
+                    {"data": 'domain'},
+                    {"data": 'ky'},
+                    {"data": 'state'},
+                    {"data": 'attack_sum'},
+                    {"data": 'last_attack'},
+                ],
+                "columnDefs": [
+                    // 将Salary列变为红色
+                    {
+                        "targets": [1],
+                        "data": "cpu",
+                        "render": function (data, type, row, meta) { // 返回自定义内容
+                            return "fuck";
+                        }
+                    },
+                    {
+                        "targets": [5],
+                        "data": "cpu",
+                        "render": function (data, type, row, meta) { // 返回自定义内容
+                            a = '<div><a href="#" class="btn btn-sm red btn-outline" data-toggle=\'modal\' data-target=\'#editModal\' onclick="btn_site(1,\''+row.domain+'\')">编辑</a>';
+                            a = a + '<button class="btn btn-sm red btn-outline" onclick="btn_site(2,\''+row.domain+'\')">停用</button>';
+                            a += '<button class="btn btn-sm red btn-outline" onclick="btn_site(3,\''+row.domain+'\')">删除</button></div>';
+                            return a;
+                        }
+                    }
+                ],
+                //多语言配置
+                "createdRow": function (nRow, aData, iDataIndex) {
+                    $('td:eq(0)', nRow).html("<span class='row-details row-details-close' data_id='" + aData['id'] + "'></span>&nbsp;" + aData['domain']);
+                }
+            });
+
+            $('#xTable').on('click', 'tbody td .row-details',
+                function () {
+                    var nTr = $(this).parents('tr')[0];
+                    if (dt.fnIsOpen(nTr)) //判断是否已打开
+                    {
+                        /* This row is already open - close it */
+                        $(this).addClass("row-details-close").removeClass("row-details-open");
+                        dt.fnClose(nTr);
+                    } else {
+                        /* Open this row */
+                        $(this).addClass("row-details-open").removeClass("row-details-close");
+                        // 调用方法显示详细信息 data_id为自定义属性 存放配置ID
+                        fnFormatDetails(nTr, $(this).attr("data_id"));
+                    }
+                });
+
+            function fnFormatDetails(nTr, pdataId) {
+                //根据配置Id 异步查询数据
+                var a = "/waf/api?action=getsiteinfo&id=" + pdataId;
+                htmlobj = $.ajax({url: a, async: false});
+                var sOut = '<center> <p style="width:70%">' + htmlobj.responseText + '</p></center>';
+                dt.fnOpen(nTr, sOut, 'details');
+            }
+            $('#form_btn').click(function () {
+                var AjaxURL = "/waf/api?action=addsite";
+                $.ajax({
+                    type: "POST",
+                    dataType: "html",
+                    url: AjaxURL,
+                    data: $('#addsite_form').serialize(),
+                    success: function (data) {
+                        var result = data;
+                        alert(result);
+                        $('#xTable').DataTable().ajax.reload();
+                        if (result == 'ok') {
+                            $("#add_error").hide();
+                            $("#add_info").show();
+                            setTimeout(function () {
+                                $("#myModal").modal('hide');
+                            }, 1000);
+                            setTimeout(function () {
+                                $('#xTable').DataTable().ajax.reload();
+                            }, 1500);
+                        }
+                        if (result == 'error') {
+                            $("#add_error").show();
+                        }
+                    },
+                    error: function (data) {
+                        alert("error:" + data.responseText);
+                    }
+                });
+            });
+            $('#apply_btn').click(function () {
+                var xurl="/waf/api?action=reloadnginx";
+                htmlobj=$.ajax({url:xurl,async:false});
+                alert(htmlobj.responseText);
+            })
+            $('#form_edit_btn').click(function () {
+                    var AjaxURL = "/waf/api?action=editsite";
+                    $.ajax({
+                        type: "POST",
+                        dataType: "html",
+                        url: AjaxURL,
+                        data: $('#editsite_form').serialize(),
+                        success: function (data) {
+                            alert(data);
+                            $('#xTable1').DataTable().ajax.reload();
+                        },
+                        error: function (data) {
+                            alert("error:" + data.responseText);
+                        }
+                    });
+                });
+        });
+    </script>
+</head>
+<!-- END HEAD -->
+
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
+<div class="page-wrapper">
+    <!-- BEGIN HEADER -->
+    {% include "top_menu.html" %}
+    <!-- END HEADER -->
+    <!-- BEGIN HEADER & CONTENT DIVIDER -->
+    <div class="clearfix"></div>
+    <!-- END HEADER & CONTENT DIVIDER -->
+    <!-- BEGIN CONTAINER -->
+    <div class="page-container">
+        <!-- BEGIN SIDEBAR -->
+        {% include "left_menu.html" %}
+        <!-- END SIDEBAR -->
+        <!-- BEGIN CONTENT -->
+        <div class="page-content-wrapper">
+            <!-- BEGIN CONTENT BODY -->
+            <div class="page-content">
+                <!-- BEGIN PAGE HEADER-->
+                <!-- BEGIN PAGE BAR -->
+                <div class="page-bar">
+                    <ul class="page-breadcrumb">
+                        <li>
+                            <a href="index.html">waf管理</a>
+                            <i class="fa fa-circle"></i>
+                        </li>
+                        <li>
+                            <span>域名配置</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- END PAGE BAR --
+                 END PAGE TITLE-->
+                <h1></h1>
+                <!-- END PAGE HEADER-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert note note-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                            <p> 对waf节点请谨慎操作！ </p>
+                        </div>
+
+                        <div class="row" style="margin-bottom: 10px">
+                            <form role="form">
+                                <div class="col-md-3">
+                                    <input class="form-control" type="text" placeholder="输入域名">
+                                </div>
+                                <div class="col-md-4">
+                                    <button id="sample_editable_1_new" class="btn sbold green"> 搜索
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </button>
+                                </div>
+                            </form>
+                            <div class="col-md-5">
+                                <div class="btn-group pull-right">
+                                    <button id="apply_btn" class="btn sbold green" style="margin-right: 10px" > 应用生效
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                    <button id="sample_editable_1_new" class="btn sbold green" data-toggle='modal'
+                                            data-target='#myModal'> 新增域名
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- BEGIN SAMPLE TABLE PORTLET-->
+                        <div class="portlet box green">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="fa fa-cogs"></i>waf防护站点列表
+                                </div>
+                            </div>
+                            <div class="portlet-body flip-scroll">
+                                <table class="table table-bordered table-striped table-condensed flip-content"
+                                       id="xTable">
+                                    <thead class="flip-content">
+                                    <tr>
+
+                                        <th width="20%"> 域名</th>
+                                        <th> 业务可用性</th>
+                                        <th class="textual"> 状态</th>
+                                        <th class="textual"> 攻击总数</th>
+                                        <th class="numeric"> 安全状态</th>
+                                        <th width="140px"> 操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- END SAMPLE TABLE PORTLET-->
+                    </div>
+                </div>
+            </div>
+            <!-- END CONTENT BODY -->
+        </div>
+        <!-- END CONTENT -->
+    </div>
+    <!-- END CONTAINER -->
+    <!-- BEGIN FOOTER -->
+    {% include "footer.html" %}
+    <!-- END FOOTER -->
+</div>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 800px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    添加域名
+                </h4>
+            </div>
+            <form id="addsite_form" class="form-horizontal" role="form">
+                {% csrf_token %}
+                <div class="modal-body" style="padding-left: 30px">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">域名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="domain" placeholder="例如：www.itiger.com">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">协议类型</label>
+                        <div class="col-sm-10">
+                            <input type="checkbox" name="http" checked="checked">HTTP <input type="checkbox" name="https">HTTPS
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">源站IP</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" rows="3" style="width:500px" name="ips"></textarea><br>请以英文,隔开，不可换行，最多20个
+                        </div>
+                    </div>
+                    <div class="alert alert-success" id="add_info" style="display: none">
+                        <a href="#" class="close" data-dismiss="alert">
+                            &times;
+                        </a>
+                        <strong>成功！</strong>已经成功添加域名。
+                    </div>
+                    <div class="alert alert-danger" id="add_error" style="display: none">
+                        <a href="#" class="close" data-dismiss="alert">
+                            &times;
+                        </a>
+                        <strong>错误！</strong>检查你的输入后重试。
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="form_btn">确定</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" style="width: 800px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        编辑站点配置
+                    </h4>
+                </div>
+                <form id="editsite_form" class="form-horizontal" role="form">
+                    {% csrf_token %}
+                    <div class="modal-body" style="padding-left: 30px">
+                        <div class="form-group">
+                            <label class="control-label">配置内容</label>
+                            <div>
+                                <input name="site_domain" type="hidden" />
+                                <textarea class="form-control" rows="3" style="width:98%;height:300px" name="site_conf_txt"></textarea><br>请以英文,隔开，不可换行，最多20个
+                            </div>
+                        </div>
+                        <div class="alert alert-success" id="add_info" style="display: none">
+                            <a href="#" class="close" data-dismiss="alert">
+                                &times;
+                            </a>
+                            <strong>成功！</strong>已经成功修改规则。
+                        </div>
+                        <div class="alert alert-danger" id="add_error" style="display: none">
+                            <a href="#" class="close" data-dismiss="alert">
+                                &times;
+                            </a>
+                            <strong>错误！</strong>检查你的输入后重试。
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" id="form_edit_btn">确定</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+    <!-- /.modal -->
+            </div>
+        </div>
+<!--[if lt IE 9]>
+<script src="/static/global/plugins/respond.min.js"></script>
+<script src="/static/global/plugins/excanvas.min.js"></script> 
+<script src="/static/global/plugins/ie8.fix.min.js"></script> 
+<![endif]-->
+<!-- BEGIN CORE PLUGINS -->
+
+</body>
+
+</html>

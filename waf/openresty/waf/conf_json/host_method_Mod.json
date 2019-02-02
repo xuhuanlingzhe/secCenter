@@ -1,0 +1,12 @@
+[ {
+  "hostname": [ {
+    "101.200.122.200": true,
+    "101.200.122.200:5460": true,
+    "www.g.com": true
+  }, "dict" ],
+  "method": [ {
+    "GET": true,
+    "POST": true
+  }, "dict" ],
+  "state": "on"
+} ]

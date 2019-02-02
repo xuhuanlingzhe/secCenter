@@ -1,0 +1,29 @@
+[ {
+  "action": [ "allow", "uri" ],
+  "state": "on",
+  "uri": [ "\\.(css|js|flv|swf|woff|txt)$", "jio" ]
+}, {
+  "action": [ "log", "referer" ],
+  "referer": [ "hao123", "in", true ],
+  "state": "on",
+  "uri": [ "\\.(gif|jpg|png|jpeg|bmp|ico)$", "jio" ]
+}, {
+  "action": [ "deny", "useragent" ],
+  "state": "on",
+  "useragent": [ "baidu", "in" ]
+}, {
+  "action": [ "deny", "app_ext" ],
+  "app_ext": [ [ "post_form", [ "\\.(jpg|jpeg|png|webp|gif)$", "jio", [ "image0", 2 ], true ], "or" ], [ "post_form", [ "(;|-|/)", "jio", [ "image0", 2 ] ] ] ],
+  "post_form": 1024,
+  "state": "on",
+  "uri": [ "/post.html", "" ]
+}, {
+  "action": [ "deny", "network" ],
+  "network": {
+    "blackTime": 600,
+    "maxReqs": 30,
+    "pTime": 10
+  },
+  "state": "on",
+  "uri": [ "/index.html", "" ]
+} ]

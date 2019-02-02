@@ -1,0 +1,44 @@
+{
+  "Mod_state": "on",
+  "app_Mod": "on",
+  "args_Mod": "on",
+  "autoSync": {
+    "state": "Slave",
+    "timeAt": 5
+  },
+  "baseDir": "/opt/openresty/waf/",
+  "cookie_Mod": "on",
+  "debug_Mod": false,
+  "denyMsg": {
+    "msg": "waf deny",
+    "state": "on"
+  },
+  "header_Mod": "on",
+  "host_method_Mod": "off",
+  "htmlPath": "/opt/openresty/waf/index/",
+  "ip_Mod": "on",
+  "jsonPath": "/opt/openresty/waf/conf_json/",
+  "logPath": "/opt/openresty/waf/logs/",
+  "log_conf": {
+    "filename": "waf.log",
+    "state": "on",
+    "tb_concat": " ",
+    "tb_formart": [ "$time", "$remoteIp", "$host", "$ip", "$method", "$server_protocol", "$status", "$request_uri", "$useragent", "$referer", "waf_log:", "$waf_log", "\n" ]
+  },
+  "network_Mod": "on",
+  "ngx_status": "on",
+  "post_Mod": "on",
+  "post_form": 10240,
+  "realIpFrom_Mod": "on",
+  "redis_Mod": {
+    "Password": "fwSWRzVU",
+    "Port": 6379,
+    "ip": "172.30.65.2",
+    "state": "on"
+  },
+  "referer_Mod": "on",
+  "replace_Mod": "off",
+  "rewrite_Mod": "on",
+  "uri_Mod": "on",
+  "useragent_Mod": "on"
+}

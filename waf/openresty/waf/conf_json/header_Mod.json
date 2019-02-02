@@ -1,0 +1,11 @@
+[ {
+  "header": [ "*", "", [ "Acunetix_Aspect", "end" ] ],
+  "hostname": [ "*", "" ],
+  "state": "on",
+  "uri": [ "*", "" ]
+}, {
+  "header": [ "*", "", [ "X_Scan_Memo", "all" ] ],
+  "hostname": [ "*", "" ],
+  "state": "on",
+  "uri": [ "*", "" ]
+} ]

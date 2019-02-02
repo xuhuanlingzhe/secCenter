@@ -1,0 +1,106 @@
+[ {
+  "action": "deny",
+  "args_data": [ "\\.\\./", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "args_data": [ "\\:\\$", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "args_data": [ "\\$\\{", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "args_data": [ "select.+(from|limit)", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "args_data": [ "(?:(union(.*?)select))", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "args_data": [ "having|rongjitest", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "args_data": [ "sleep\\((\\s*)(\\d*)(\\s*)\\)", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "args_data": [ "benchmark\\((.*)\\,(.*)\\)", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "args_data": [ "base64_decode\\(", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "args_data": [ "(?:from\\W+information_schema\\W)", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "args_data": [ "(?:(?:current_)user|database|schema|connection_id)\\s*\\(", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "args_data": [ "(?:etc\\/\\W*passwd)", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "args_data": [ "into(\\s+)+(?:dump|out)file\\s*", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "args_data": [ "group\\s+by.+\\(", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "args_data": [ "(?:define|eval|file_get_contents|include|require|require_once|shell_exec|phpinfo|system|passthru|preg_\\w+|execute|echo|print|print_r|var_dump|(fp)open|alert|showmodaldialog)\\(", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "args_data": [ "xwork\\.MethodAccessor", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "args_data": [ "(gopher|doc|php|glob|file|phar|zlib|ftp|ldap|dict|ogg|data)\\:\\/", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "args_data": [ "java\\.lang", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "args_data": [ "\\$_(GET|post|cookie|files|session|env|phplib|GLOBALS|SERVER)\\[", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "args_data": [ "\\<(iframe|script|body|img|layer|div|meta|style|base|object|input)", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "args_data": [ "(onmouseover|onerror|onload)\\=\t", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+} ]

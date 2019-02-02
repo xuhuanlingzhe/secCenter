@@ -1,0 +1,101 @@
+[ {
+  "action": "deny",
+  "cookie": [ "\\.\\./", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "cookie": [ "\\:\\$", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "cookie": [ "\\$\\{", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "cookie": [ "select.+(from|limit)", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "cookie": [ "(?:(union(.*?)select))", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "cookie": [ "having|rongjitest", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "cookie": [ "sleep\\((\\s*)(\\d*)(\\s*)\\)", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "cookie": [ "benchmark\\((.*)\\,(.*)\\)", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "cookie": [ "base64_decode\\(", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "cookie": [ "(?:from\\W+information_schema\\W)", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "cookie": [ "(?:(?:current_)user|database|schema|connection_id)\\s*\\(", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "cookie": [ "(?:etc\\/\\W*passwd)", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "cookie": [ "into(\\s+)+(?:dump|out)file\\s*", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "cookie": [ "group\\s+by.+\\(", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "cookie": [ "xwork.MethodAccessor", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "cookie": [ "(?:define|eval|file_get_contents|include|require|require_once|shell_exec|phpinfo|system|passthru|preg_\\w+|execute|echo|print|print_r|var_dump|(fp)open|alert|showmodaldialog)\\(", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "cookie": [ "xwork\\.MethodAccessor", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "cookie": [ "(gopher|doc|php|glob|file|phar|zlib|ftp|ldap|dict|ogg|data)\\:\\/", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "cookie": [ "java\\.lang", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+}, {
+  "action": "deny",
+  "cookie": [ "\\$_(GET|post|cookie|files|session|env|phplib|GLOBALS|SERVER)\\[", "jio" ],
+  "hostname": [ "*", "" ],
+  "state": "on"
+} ]

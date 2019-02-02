@@ -1,0 +1,19 @@
+[ {
+  "hostname": [ [ "101.200.122.200", "127.0.0.1" ], "list" ],
+  "network": {
+    "blackTime": 600,
+    "maxReqs": 30,
+    "pTime": 10
+  },
+  "state": "on",
+  "uri": [ "/api/time", "" ]
+}, {
+  "hostname": [ "id.game.com", "" ],
+  "network": {
+    "blackTime": 600,
+    "maxReqs": 20,
+    "pTime": 10
+  },
+  "state": "off",
+  "uri": [ "^/2.html$", "jio" ]
+} ]
