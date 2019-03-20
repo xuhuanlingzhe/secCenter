@@ -118,7 +118,7 @@ def UpdatePortTag(ip,port,tagname):
         pass
 
 def UpdateHostName():
-    url ='http://ebs.guazi-corp.com/Service/API/index/api/EbsInterface/action/getServerInfo/token/sec-get-info/type/3/info/'
+    url ='http://ebs.fuck-corp.com//type/3/info/'
     headers = {
             'User-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:54.0) Gecko/20100101 Firefox/54.0',
             'Accept': 'text / html, application / xhtml + xml,application / xml;',
