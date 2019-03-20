@@ -16,19 +16,13 @@ class decrypt_log():
         except Exception as e:
             print e
     def get_app_name(self,app_key):
-        data={'Ka7Kohng2jahv':'oauth.itiger.com',
-              'eimooR6ohboo4':'customer.tigerfintech.com',
-              'Kahghiech7se':'www.itiger.com',
-              'iewiy5eiViis':'crm.tigerfintech.com',
-              'beepeingaeT8':'v.tigerfintech.com',
-              'Shahraighoo':'report',
-              'li9dau9Xohro':'sms',
-              'VeiH2Thael5e':'script',
-              'kegBTVnPP6WP':'excalibur',
-              'bfQbKJXJOvWA':'payserver',
-              'oRae9eetha':'roc',
-              'equobe5joh':'am.itiger.com',
-              'ohnuToo5Sa':'security'}
+        data={'Ka444ahv':'auth.fuck.com',
+              'eiertreoo4':'cuer.fuck.com',
+              'Kahgeertrese':'www.itiger.com',
+              'ie54654is':'crm.fuck.com',
+              'beertreteT8':'v.fuck.com',
+              'Shretretoo':'reportfuck',
+              }
         return data[app_key]
     def search_es(self,index_type,str,userid,stime,etime):
         if index_type==1:
