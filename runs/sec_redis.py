@@ -15,8 +15,7 @@ class sec_redis():
         return db.cursor()
 
     def __init_relaydb(self):
-        #db = MySQLdb.connect(host='10.16.208.9', port=443, user='relay_admin', passwd='Relay@2015',db='relay',charset='utf8')
-        db = MySQLdb.connect(host='10.16.17.109', port=3409, user='relay_admin', passwd='Relay@2015',db='relay',charset='utf8')
+        db = MySQLdb.connect(host='127.0.0.1', port=3409, user='relay_admin', passwd='123456',db='relay',charset='utf8')
         db.autocommit(1)
         return db.cursor()
 
